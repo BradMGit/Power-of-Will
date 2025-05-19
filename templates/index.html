@@ -1,65 +1,36 @@
 {% include "header.html" %}
 
-<!-- Page Header-->
-<header
-  class="masthead"
-  style="background-image: url('../static/assets/img/home-bg.jpg')"
->
-  <div class="container position-relative px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-      <div class="col-md-10 col-lg-8 col-xl-7">
-        <div class="site-heading">
-          <h1>Angela's Blog</h1>
-          <span class="subheading">A collection of random musings.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-<!-- Main Content-->
-<div class="container px-4 px-lg-5">
-  <div class="row gx-4 gx-lg-5 justify-content-center">
-    <div class="col-md-10 col-lg-8 col-xl-7">
-      <!-- Post preview-->
-      {% for post in all_posts %}
-      <div class="post-preview">
-        <a href="{{ url_for('show_post', post_id=post.id) }}">
-          <h2 class="post-title">{{ post.title }}</h2>
-          <h3 class="post-subtitle">{{ post.subtitle }}</h3>
-        </a>
-        <p class="post-meta">
-          Posted by
-          <!-- post.author.name is now a User object -->
-          <a href="#">{{post.author.name}}</a>
-          on {{post.date}}
-          <!-- Only show delete button if user id is 1 (admin user) -->
-          {% if current_user.id == 1: %}
-          <a href="{{url_for('delete_post', post_id=post.id) }}">✘</a>
-          {% endif %}
-        </p>
-      </div>
-      <!-- Divider-->
-      <hr class="my-4" />
-      {% endfor %}
+<!-- HERO INTRO -->
+<section class="text-center py-3">
+  <h1 class="display-5 will-title mb-2">Welcome to The Great Will</h1>
+  <p class="lead mb-3">Voiceover talent. Gamer at heart. Storyteller by nature.</p>
+  <a href="{{ url_for('demos') }}" class="btn btn-primary">Listen to Demos</a>
+</section>
 
-      <!-- New Post -->
-      <!-- Only show Create Post button if user id is 1 (admin user) -->
-      {% if current_user.id == 1: %}
-      <div class="d-flex justify-content-end mb-4">
-        <a
-          class="btn btn-primary float-right"
-          href="{{url_for('add_new_post')}}"
-          >Create New Post</a
-        >
-      </div>
-      {% endif %}
+<!-- FEATURED DEMO -->
+<section class="text-center my-3">
+  <h2 class="will-title" style="font-size: 2rem;">🎙️ Featured Demo</h2>
+  <p class="mb-2">A sneak peek into William's world of characters:</p>
+  <audio controls>
+    <source src="{{ url_for('static', filename='audio/sample.m4a') }}" type="audio/mp4">
+    Your browser does not support the audio element.
+  </audio>
+</section>
 
-      <!-- Pager-->
-      <div class="d-flex justify-content-end mb-4">
-        <a class="btn btn-secondary text-uppercase" href="#!">Older Posts →</a>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- ABOUT PREVIEW -->
+<section class="about-text text-center mt-4 mb-4 px-3">
+  <h2 class="will-title" style="font-size: 1.75rem;">About William</h2>
+  <p>
+    William Almonte, also known as "The Great Will" I am a bilingual digital creator and voice actor living with SMA Type 2.
+    Whether voicing a cartoon cat or a cosmic narrator, I brings heart, humor, and imagination to every role.
+  </p>
+  <a href="{{ url_for('about') }}" class="btn btn-outline-primary mt-2">Read More</a>
+</section>
+
+<!-- CALL TO ACTION -->
+<section class="text-center my-3">
+  <h3 class="mb-2">Interested in working together?</h3>
+  <a href="{{ url_for('contact') }}" class="btn btn-success">Contact Me</a>
+</section>
 
 {% include "footer.html" %}

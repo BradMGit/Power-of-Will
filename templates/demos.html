@@ -1,0 +1,58 @@
+{% include "header.html" %}
+
+<!-- Main Content -->
+<main class="mb-5">
+  <div class="container py-5">
+    <h1 class="text-center will-title mb-4">Voice Demos</h1>
+
+    <div class="row justify-content-center">
+      <!-- Demo 1 -->
+      <div class="col-md-6 col-lg-5 mb-4">
+        <div class="card shadow-sm p-3">
+          <h5 class="mb-2 text-center">Cartoon Cat</h5>
+          <audio controls class="w-100">
+            <source src="{{ url_for('static', filename='audio/cat-meow.mp3') }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
+
+      <!-- Demo 2 -->
+      <div class="col-md-6 col-lg-5 mb-4">
+        <div class="card shadow-sm p-3">
+          <h5 class="mb-2 text-center">Epic Narrator</h5>
+          <audio controls class="w-100">
+            <source src="{{ url_for('static', filename='audio/epic-narrator.mp3') }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
+
+      <!-- Demo 3 -->
+      <div class="col-md-6 col-lg-5 mb-4">
+        <div class="card shadow-sm p-3">
+          <h5 class="mb-2 text-center">Anime Hero</h5>
+          <audio controls class="w-100">
+            <source src="{{ url_for('static', filename='audio/anime-hero.mp3') }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
+
+      <!-- Demo 4 -->
+      <div class="col-md-6 col-lg-5 mb-4">
+        <div class="card shadow-sm p-3">
+          <h5 class="mb-2 text-center">Unadulterated Power of Will</h5>
+          <audio controls class="w-100">
+            <source src="{{ url_for('static', filename='audio/sample.m4a') }}" type="audio/mp4">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
+
+      <!-- Add more demos as needed -->
+    </div>
+  </div>
+</main>
+
+{% include "footer.html" %}

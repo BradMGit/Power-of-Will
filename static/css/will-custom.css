@@ -1,0 +1,108 @@
+/* === Custom Styles for Power of Will VO === */
+
+/* Color variables */
+:root {
+  --will-red: #c1121f;
+  --will-navy: #001f3f;
+  --will-charcoal: #333;
+  --will-cream-bg: #fffbe6;
+}
+
+/* General body styles */
+body,
+body.about-page {
+  background-color: var(--will-cream-bg);
+  font-family: 'Poppins', sans-serif;
+  color: var(--will-charcoal);
+}
+
+/* NAVIGATION BAR */
+#mainNav {
+  position: relative;
+  z-index: 1000;
+  width: 100%;
+  margin: 0;
+  padding: 0.5rem 0;
+  background-color: var(--will-navy) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-nav {
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.navbar-nav .nav-link {
+  color: white;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.navbar-toggler {
+  z-index: 1001;
+  border: none;
+}
+
+.navbar-toggler .fas.fa-bars {
+  color: white;
+  font-size: 1.5rem;
+}
+
+/* HEADER IMAGE (BANNER BELOW NAV) */
+.image-header {
+  width: 100%;
+  text-align: center;
+  padding-top: 1rem;
+  margin-top: 0;
+}
+
+.header-img {
+  max-width: 1000px;
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+/* ABOUT PAGE HEADING */
+.will-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2.2rem, 8vw, 6rem);
+  color: var(--will-red);
+  text-align: center;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+/* ABOUT PAGE PARAGRAPHS */
+.about-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  line-height: 1.8;
+  color: var(--will-charcoal);
+  padding: 0 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: justify;
+}
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 600px) {
+  .about-text {
+    text-align: left;
+  }
+
+  .will-title {
+    white-space: normal;
+  }
+}
+
+.about-page .image-header .header-img {
+  max-height: 250px;
+  object-fit: cover;
+}

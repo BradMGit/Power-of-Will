@@ -1,47 +1,34 @@
+{% set page = 'about' %}
 {% include "header.html" %}
 
-<!-- Page Header-->
-<header
-  class="masthead"
-  style="background-image: url('../static/assets/img/about-bg.jpg')"
->
-  <div class="container position-relative px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-      <div class="col-md-10 col-lg-8 col-xl-7">
-        <div class="page-heading">
-          <h1>About Me</h1>
-          <span class="subheading">This is what I do.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-<!-- Main Content-->
 <main class="mb-4">
-  <div class="container px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-      <div class="col-md-10 col-lg-8 col-xl-7">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe
-          nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis
-          sit soluta odio, adipisci quas excepturi maxime quae totam ducimus
-          consectetur?
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
-          praesentium recusandae illo eaque architecto error, repellendus iusto
-          reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in
-          officia voluptas voluptatibus, minus!
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut
-          consequuntur magnam, excepturi aliquid ex itaque esse est vero natus
-          quae optio aperiam soluta voluptatibus corporis atque iste neque sit
-          tempora!
-        </p>
-      </div>
+  <section class="container text-center py-4">
+
+    <!-- Featured Image -->
+    <div class="mb-4">
+      <img src="{{ url_for('static', filename='assets/img/about-feature.jpg') }}"
+           alt="William Almonte voiceover graphic"
+           class="img-fluid"
+           style="max-width: 80%; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.15);" />
     </div>
-  </div>
+
+    <!-- Title -->
+    <h1 class="will-title mb-3">Meet The Great Will</h1>
+
+    <!-- About Paragraphs -->
+    <div class="about-text text-center px-3" style="max-width: 900px; margin: 0 auto;">
+      <p>
+        I’m William, a digital creator and aspiring voice actor living with SMA Type 2.
+        My condition limits physical movement, but it doesn’t limit creativity.
+        I’m bilingual in English and Spanish, a passionate gamer, and a character actor with a vivid imagination.
+      </p>
+      <p>
+        Voice acting gives me the power to express what everyday life can sometimes suppress.
+        It’s a place where I can be silly, bold, serious—or all three.
+        Whether I’m a cowboy outlaw or a cartoon cat, I pour my whole self into every role.
+      </p>
+    </div>
+  </section>
 </main>
 
 {% include "footer.html" %}

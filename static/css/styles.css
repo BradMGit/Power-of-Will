@@ -11,6 +11,10 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 :root {
+  --will-red: #c1121f;
+  --will-navy: #001f3f;
+  --will-charcoal: #333;
+  --will-cream-bg: #fffbe6;
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
   --bs-purple: #6f42c1;
@@ -88,6 +92,78 @@
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
+  }
+}
+
+.will-title {
+  font-family: 'Orbitron', sans-serif; /* or 'Press Start 2P' */
+  font-size: clamp(2.2rem, 8vw, 6rem);
+  color: #c1121f; /* bold red */
+  text-align: center;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  overflow-wrap: normal;
+}
+
+.page-heading {
+  overflow-x: auto; /* optional: helps prevent force wrapping */
+  max-width: 100%;
+  padding: 0 1rem;
+}
+
+.header-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 500px) {
+  .will-title {
+    white-space: normal; /* allow wrapping on tiny screens */
+  }
+}
+
+/* Body background & base font override for About */
+body.about-page {
+  background-color: var(--will-cream-bg);
+  font-family: 'Poppins', sans-serif;
+  color: var(--will-charcoal);
+}
+
+/* Responsive heading */
+.page-heading h1 {
+  font-family: 'Orbitron', sans-serif; /* or 'Press Start 2P' */
+  font-size: clamp(2.5rem, 6vw, 6.5rem);
+  color: var(--will-red);
+  white-space: normal;
+  text-align: center;
+}
+
+/* Subheading */
+.page-heading .subheading {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--will-navy);
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+/* Paragraph styling */
+.about-text {
+  font-family: 'Poppins', sans-serif; /* or 'Raleway' */
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  line-height: 1.8;
+  color: var(--will-charcoal);
+  padding: 0 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: justify;
+}
+
+@media (max-width: 600px) {
+  .about-text {
+    text-align: left;
   }
 }
 
@@ -10852,4 +10928,143 @@ header.masthead .post-heading .meta a {
 .flash {
     color: #ee6f57;
     text-align: center;
+}
+
+.masthead::before {
+  background-color: transparent !important;
+}
+
+.masthead {
+  background-image: url('../static/assets/img/about-bg.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #000;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-top: 40%; /* or adjust based on desired aspect ratio */
+  position: relative;
+}
+
+.masthead {
+  background-image: url('../static/assets/img/about-bg.jpg'); /* ✅ Make sure this path is correct */
+  background-size: cover;  /* or 'contain' if you don't want cropping */
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 40%; /* controls height based on width (adjust as needed) */
+}
+
+/* Optional: remove the dimming overlay */
+.masthead::before {
+  background-color: transparent !important;
+}
+
+.image-header {
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.header-img {
+  max-width: 1000px; /* ~15 inches */
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#mainNav .container {
+  max-width: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+#mainNav .navbar-collapse {
+  justify-content: flex-start !important;
+}
+
+#mainNav .navbar-nav {
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: flex-start;
+  gap: 1rem; /* adds spacing between items */
+}
+
+#mainNav .nav-link {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+#mainNav .navbar-collapse {
+  justify-content: center;
+}
+
+#mainNav .navbar-nav {
+  width: auto;
+  justify-content: center;
+}
+
+#mainNav .nav-link {
+  padding: 0.75rem 1rem;
+}
+
+/* Fix navbar display & centering */
+#mainNav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: transparent;
+}
+
+#mainNav .navbar-nav {
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+#mainNav .nav-link {
+  color: white; /* change to black if needed depending on header image contrast */
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Header image setup */
+.image-header {
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.header-img {
+  max-width: 1000px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+#mainNav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* this brings it above the image */
+  background-color: transparent;
+}
+
+.navbar-toggler {
+  z-index: 1001; /* ensures the button appears on top */
+  border: none;
+  color: white;
+}
+
+.navbar-toggler:focus {
+  outline: none;
+  box-shadow: none;
 }

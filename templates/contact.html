@@ -1,100 +1,60 @@
+{% set page = 'contact' %}
 {% include "header.html" %}
 
-<!-- Page Header-->
-<header
-  class="masthead"
-  style="background-image: url('../static/assets/img/contact-bg.jpg')"
->
-  <div class="container position-relative px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-      <div class="col-md-10 col-lg-8 col-xl-7">
-        <div class="page-heading">
-          {% if msg_sent: %}
-          <h1>Successfully sent your message</h1>
-          {% else: %}
-          <h1>Contact Me</h1>
-          {% endif %}
-          <span class="subheading">Have questions? I have answers.</span>
+<!-- CONTACT HERO -->
+<section class="text-center py-4">
+  <div class="container">
+    <img src="{{ url_for('static', filename='assets/img/contact-bg.jpg') }}"
+         alt="Contact Banner"
+         class="img-fluid mb-4"
+         style="border-radius: 12px; max-width: 65%; box-shadow: 0 6px 16px rgba(0,0,0,0.15);" />
+
+    <h1 class="will-title mb-3">Let's Connect</h1>
+    <p class="lead">Have questions? Want to collaborate? Drop me a message and I’ll get back to you!</p>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="container py-3">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      {% if msg_sent %}
+        <div class="alert alert-success text-center">
+          ✅ Message sent! I’ll get back to you as soon as possible.
         </div>
-      </div>
+      {% endif %}
+      <form method="post" action="{{ url_for('contact') }}">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" name="name" id="name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" name="email" id="email" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone (optional)</label>
+          <input type="text" name="phone" id="phone" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Message</label>
+          <textarea name="message" id="message" class="form-control" rows="5" required></textarea>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary px-4">Send Message</button>
+        </div>
+      </form>
+
+      <!-- ALT CONTACT INFO -->
+      <p class="mt-4 text-center">
+        Prefer to email directly? Reach me at:
+        <br />
+        <a href="mailto:walmeida39@gmail.com">walmeida39@gmail.com</a>
+        <br />
+        <span style="font-style: italic; color: #666;">🎤 “My mic is always on – let’s talk!”</span>
+      </p>
     </div>
   </div>
-</header>
-<!-- Main Content-->
-<main class="mb-4">
-  <div class="container px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-      <div class="col-md-10 col-lg-8 col-xl-7">
-        <p>
-          Want to get in touch? Fill out the form below to send me a message and
-          I will get back to you as soon as possible!
-        </p>
-        <div class="my-5">
-          <!-- * * * * * * * * * * * * * * *-->
-          <!-- * * Simplified SB Contact Form for the Tutorial* *-->
-          <form
-            id="contactForm"
-            name="sentMessage"
-            action="{{ url_for('contact') }}"
-            method="post"
-          >
-            <div class="form-floating">
-              <input
-                class="form-control"
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Enter your name..."
-                required
-              />
-              <label for="name">Name</label>
-            </div>
-            <div class="form-floating">
-              <input
-                class="form-control"
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Enter your email..."
-                required
-              />
-              <label for="email">Email address</label>
-            </div>
-            <div class="form-floating">
-              <input
-                class="form-control"
-                id="phone"
-                name="phone"
-                type="tel"
-                placeholder="Enter your phone number..."
-                required
-              />
-              <label for="phone">Phone Number</label>
-            </div>
-            <div class="form-floating">
-              <textarea
-                class="form-control"
-                id="message"
-                name="message"
-                placeholder="Enter your message here..."
-                required
-                style="height: 12rem"
-              ></textarea>
-              <label for="message">Message</label>
-            </div>
-            <br />
-            <button
-              class="btn btn-primary text-uppercase"
-              id="submitButton"
-              type="submit"
-            >
-              Send
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
+</section>
 
 {% include "footer.html" %}
