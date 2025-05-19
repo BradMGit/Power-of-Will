@@ -1,0 +1,15 @@
+{
+  "name": "Power of Will",
+  "short_name": "Great Will",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#001f3f",
+  "theme_color": "#c1121f",
+  "icons": [
+    {
+      "src": "/static/assets/will-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
