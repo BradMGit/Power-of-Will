@@ -82,14 +82,15 @@ def send_email(name, email, phone, message):
     with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
         connection.starttls()
         connection.login(
-            user=os.environ.get("EMAIL_KEY"),
-            password=os.environ.get("PASSWORD_KEY")
+            user=os.environ.get("EMAIL_USER"),
+            password=os.environ.get("EMAIL_PASS")
         )
         connection.sendmail(
-            from_addr=os.environ.get("EMAIL_KEY"),
-            to_addrs=os.environ.get("EMAIL_KEY"),
+            from_addr=os.environ.get("EMAIL_USER"),
+            to_addrs=os.environ.get("EMAIL_USER"),
             msg=email_message
         )
+
 
 # === Optional: Keep login system for future editing ===
 
