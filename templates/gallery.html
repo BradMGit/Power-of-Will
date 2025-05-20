@@ -1,0 +1,17 @@
+{% include "header.html" %}
+{% set page = 'gallery' %}
+
+<main class="container py-5 text-center">
+  <h1 class="will-title mb-2" style="font-size: 2.5rem;">Behind the Mic: The Great Gallery</h1>
+  <p class="mb-5">A glimpse into the world that fuels the voice—from snapshots and sketches to dreams and inspirations.</p>
+
+  <div class="row">
+    {% for image in images %}
+    <div class="col-md-4 mb-4">
+      <img src="{{ url_for('static', filename=image) }}" alt="Gallery Image {{ loop.index }}" class="img-fluid rounded shadow">
+    </div>
+    {% endfor %}
+  </div>
+</main>
+
+{% include "footer.html" %}

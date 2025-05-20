@@ -131,6 +131,13 @@ def login():
     return render_template("login.html", form=form, current_user=current_user, now=datetime.now())
 
 
+@app.route("/gallery")
+def gallery():
+    image_files = [f"assets/img/gallery{i}.jpg" for i in range(1, 4)]
+    return render_template("gallery.html", images=image_files, now=datetime.now())
+
+
+
 @app.route('/logout')
 def logout():
     logout_user()
