@@ -78,22 +78,37 @@ def contact():
 
 
 def send_email(name, email, phone, message):
-    email_message = f"Subject: New Message from Power of Will VO\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}"
-    with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
-        connection.starttls()
-        connection.login(
-            user=os.environ.get("EMAIL_USER"),
-            password=os.environ.get("EMAIL_PASS")
-        )
-        connection.sendmail(
-            from_addr=os.environ.get("EMAIL_USER"),
-            to_addrs=os.environ.get("EMAIL_USER"),
-            msg=email_message
-        )
+    subject = "New Message from Power of Will VO"
+
+    # Build the email content
+    email_body = f"""\
+Subject: {subject}
+
+Name: {name}
+Email: {email}
+Phone: {phone}
+Message:
+{message}
+"""
+
+    try:
+        with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
+            connection.starttls()
+            connection.login(
+                user=os.environ.get("EMAIL_USER"),
+                password=os.environ.get("EMAIL_PASS")
+            )
+            connection.sendmail(
+                from_addr=os.environ.get("EMAIL_USER"),
+                to_addrs=os.environ.get("EMAIL_USER"),
+                msg=email_body.encode("utf-8")  # Ensure proper encoding
+            )
+        print("✅ Email sent successfully.")
+    except Exception as e:
+        print("❌ Email failed to send:", e)
 
 
 # === Optional: Keep login system for future editing ===
-
 
 from forms import RegisterForm, LoginForm
 
