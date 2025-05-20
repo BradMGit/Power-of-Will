@@ -6,12 +6,14 @@
     <h1 class="text-center will-title mb-4">Voice Demos</h1>
 
     <div class="row justify-content-center">
+
+
       <!-- Demo 1 -->
       <div class="col-md-6 col-lg-5 mb-4">
         <div class="card shadow-sm p-3">
-          <h5 class="mb-2 text-center">Cartoon Cat</h5>
+          <h5 class="mb-2 text-center">The Cat's Meow</h5>
           <audio controls class="w-100">
-            <source src="{{ url_for('static', filename='audio/cat-meow.mp3') }}" type="audio/mpeg">
+            <source src="{{ url_for('static', filename='audio/cat-meow_v2.m4a') }}" type="audio/mp4">
             Your browser does not support the audio element.
           </audio>
         </div>
@@ -55,12 +57,33 @@
         <div class="card shadow-sm p-3">
           <h5 class="mb-2 text-center">Marshmallow</h5>
           <audio controls class="w-100">
-            <source src="{{ url_for('static', filename='audio/marshmallow.m4a') }}" type="audio/mp4">
+            <source src="{{ url_for('static', filename='audio/marshmallow_v2.m4a') }}" type="audio/mp4">
             Your browser does not support the audio element.
           </audio>
         </div>
       </div>
 
+      <!-- Demo 6 -->
+      <div class="col-md-6 col-lg-5 mb-4">
+        <div class="card shadow-sm p-3">
+          <h5 class="mb-2 text-center">Snake and Natalia: United Front</h5>
+          <audio controls class="w-100">
+            <source src="{{ url_for('static', filename='audio/snake_and_natalia.m4a') }}" type="audio/mp4">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
+
+      <!-- Demo 7 -->
+      <div class="col-md-6 col-lg-5 mb-4">
+        <div class="card shadow-sm p-3">
+          <h5 class="mb-2 text-center">Japanese Song</h5>
+          <audio controls class="w-100">
+            <source src="{{ url_for('static', filename='audio/Japanese_Song.m4a') }}" type="audio/mp4">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
       <!-- Add more demos as needed -->
     </div>
   </div>
