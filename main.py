@@ -137,7 +137,6 @@ def gallery():
     return render_template("gallery.html", images=image_files, now=datetime.now())
 
 
-
 @app.route('/logout')
 def logout():
     logout_user()
