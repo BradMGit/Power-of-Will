@@ -11,10 +11,11 @@
 <section class="text-center my-3">
   <h2 class="will-title" style="font-size: 2rem;">🎙️ Featured Demo</h2>
   <p class="mb-2">A sneak peek into William's world of characters:</p>
-  <audio controls>
-    <source src="{{ url_for('static', filename='audio/featured.m4a') }}" type="audio/mp4">
-    Your browser does not support the audio element.
-  </audio>
+  <canvas id="canvas-featured" width="400" height="400"></canvas>
+  <p>
+  <button onclick="playLipSync('/static/lipsync/featured.json', '/static/audio/featured.wav', 'canvas-featured')">▶ Play</button>
+  <button onclick="pauseLipSync()">⏸ Pause</button>
+  </p>
 </section>
 
 <!-- ABOUT PREVIEW -->
@@ -33,5 +34,8 @@
   <h3 class="mb-2">Interested in working together?</h3>
   <a href="{{ url_for('contact') }}" class="btn btn-success">Contact Me</a>
 </section>
+
+<!-- Load lip sync logic -->
+<script src="{{ url_for('static', filename='js/lipsync.js') }}"></script>
 
 {% include "footer.html" %}
