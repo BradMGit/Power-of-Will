@@ -67,6 +67,7 @@ function playLipSync(jsonPath, audioPath, canvasId) {
     .then(response => response.json())
     .then(data => {
       mouthCues = data.mouthCues;
+      console.log("Loaded mouthCues:", mouthCues);
       currentIndex = 0;
 
       if (!audio) {
