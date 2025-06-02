@@ -1,3 +1,4 @@
+
 let audio = null;
 let interval = null;
 let currentIndex = 0;
@@ -5,22 +6,43 @@ let mouthCues = [];
 let baseImage = new Image();
 let isBaseLoaded = false;
 
+const mouthShapes = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+const mouthImages = {};
+let loadedImages = 0;
+
+// Preload base image
 baseImage.src = '/static/assets/img/will_cat.png';
 baseImage.onload = () => {
   isBaseLoaded = true;
+  loadedImages++;
+  checkAllImagesLoaded();
 };
 
-function drawFrame(phoneme, ctx, canvas) {
-  if (!isBaseLoaded) return;
-
-  const mouthImage = new Image();
-  mouthImage.src = `/static/mouth_shapes/${phoneme}.png`;
-
-  mouthImage.onload = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(baseImage, 0, 0, 400, 400);
-    ctx.drawImage(mouthImage, -60, 20, 420, 240); // Move left and higher
+// Preload mouth shapes
+mouthShapes.forEach(shape => {
+  const img = new Image();
+  img.src = `/static/mouth_shapes/${shape}.png`;
+  img.onload = () => {
+    loadedImages++;
+    checkAllImagesLoaded();
   };
+  mouthImages[shape] = img;
+});
+
+function checkAllImagesLoaded() {
+  if (loadedImages === mouthShapes.length + 1) {
+    const canvas = document.getElementById('canvas-featured');
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(baseImage, 0, 0, 400, 400);
+  }
+}
+
+function drawFrame(phoneme, ctx, canvas) {
+  if (!isBaseLoaded || !mouthImages[phoneme]) return;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(baseImage, 0, 0, 400, 400);
+  ctx.drawImage(mouthImages[phoneme], -60, 20, 420, 240); // Position adjustment
 }
 
 function updateFrame(ctx, canvas) {
