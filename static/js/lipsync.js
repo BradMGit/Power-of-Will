@@ -39,14 +39,15 @@ function checkAllImagesLoaded() {
 function drawFrame(phoneme, ctx, canvas) {
   if (!isBaseLoaded) return;
 
-  const upperPhoneme = phoneme.toUpperCase();
+  let upperPhoneme = phoneme.toUpperCase();
+  if (!mouthImages[upperPhoneme]) {
+    upperPhoneme = 'A'; // fallback if phoneme isn't in mouthImages
+  }
+
   const mouthImg = mouthImages[upperPhoneme];
-
-  if (!mouthImg) return;
-
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(baseImage, 0, 0, 400, 400);
-  ctx.drawImage(mouthImg, -60, 20, 420, 240); // Adjusted position
+  ctx.drawImage(mouthImg, -60, 20, 420, 240); // Adjust position
 }
 
 function updateFrame(ctx, canvas) {
@@ -59,7 +60,7 @@ function updateFrame(ctx, canvas) {
     currentIndex++;
   }
 
-  const phoneme = mouthCues[currentIndex].value;
+  let phoneme = mouthCues[currentIndex]?.value || 'A';
   drawFrame(phoneme, ctx, canvas);
 }
 
