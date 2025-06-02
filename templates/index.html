@@ -11,10 +11,10 @@
 <section class="text-center my-3">
   <h2 class="will-title" style="font-size: 2rem;">🎙️ Featured Demo</h2>
   <p class="mb-2">A sneak peek into William's world of characters:</p>
-  <canvas id="canvas-featured" width="400" height="400"></canvas>
+  <canvas id="canvas-featured" width="400" height="400" style="border: 1px solid transparent;"></canvas>
   <p>
-  <button onclick="playLipSync('/static/lipsync/featured.json', '/static/audio/featured.wav', 'canvas-featured')">▶ Play</button>
-  <button onclick="pauseLipSync()">⏸ Pause</button>
+    <button onclick="playLipSync('{{ url_for('static', filename='lipsync/featured.json') }}', '{{ url_for('static', filename='audio/featured.wav') }}', 'canvas-featured')">▶ Play</button>
+    <button onclick="pauseLipSync()">⏸ Pause</button>
   </p>
 </section>
 
