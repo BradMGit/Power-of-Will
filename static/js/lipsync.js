@@ -17,7 +17,7 @@ baseImage.onload = () => {
   checkAllImagesLoaded();
 };
 
-// Preload mouth shapes
+// Preload mouth shape images
 mouthShapes.forEach(shape => {
   const img = new Image();
   img.src = `/static/mouth_shapes/${shape}.png`;
@@ -39,15 +39,14 @@ function checkAllImagesLoaded() {
 function drawFrame(phoneme, ctx, canvas) {
   if (!isBaseLoaded) return;
 
-  let upperPhoneme = phoneme.toUpperCase();
-  if (!mouthImages[upperPhoneme]) {
-    upperPhoneme = 'A'; // fallback if phoneme isn't in mouthImages
-  }
-
+  const upperPhoneme = phoneme.toUpperCase();
   const mouthImg = mouthImages[upperPhoneme];
+
+  if (!mouthImg) return;
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(baseImage, 0, 0, 400, 400);
-  ctx.drawImage(mouthImg, -60, 20, 420, 240); // Adjust position
+  ctx.drawImage(mouthImg, -60, 20, 420, 240); // Adjusted mouth position
 }
 
 function updateFrame(ctx, canvas) {
@@ -60,7 +59,7 @@ function updateFrame(ctx, canvas) {
     currentIndex++;
   }
 
-  let phoneme = mouthCues[currentIndex]?.value || 'A';
+  const phoneme = mouthCues[currentIndex].value;
   drawFrame(phoneme, ctx, canvas);
 }
 
@@ -72,14 +71,23 @@ function playLipSync(jsonPath, audioPath, canvasId) {
     .then(response => response.json())
     .then(data => {
       mouthCues = data.mouthCues;
-      console.log("Loaded mouthCues:", mouthCues);
       currentIndex = 0;
 
-      if (!audio) {
-        audio = new Audio(audioPath);
+      // Reset and create new audio object every time
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+        clearInterval(interval);
       }
 
-      audio.addEventListener('ended', () => clearInterval(interval));
+      audio = new Audio(audioPath);
+
+      audio.addEventListener('ended', () => {
+        clearInterval(interval);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(baseImage, 0, 0, 400, 400); // Show base at end
+      });
+
       audio.play();
 
       interval = setInterval(() => {
