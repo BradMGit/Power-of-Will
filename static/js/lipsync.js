@@ -1,4 +1,3 @@
-
 let audio = null;
 let interval = null;
 let currentIndex = 0;
@@ -38,11 +37,16 @@ function checkAllImagesLoaded() {
 }
 
 function drawFrame(phoneme, ctx, canvas) {
-  if (!isBaseLoaded || !mouthImages[phoneme]) return;
+  if (!isBaseLoaded) return;
+
+  const upperPhoneme = phoneme.toUpperCase();
+  const mouthImg = mouthImages[upperPhoneme];
+
+  if (!mouthImg) return;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(baseImage, 0, 0, 400, 400);
-  ctx.drawImage(mouthImages[phoneme], -60, 20, 420, 240); // Position adjustment
+  ctx.drawImage(mouthImg, -60, 20, 420, 240); // Adjusted position
 }
 
 function updateFrame(ctx, canvas) {
@@ -75,7 +79,6 @@ function playLipSync(jsonPath, audioPath, canvasId) {
       }
 
       audio.addEventListener('ended', () => clearInterval(interval));
-
       audio.play();
 
       interval = setInterval(() => {
