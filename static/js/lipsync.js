@@ -2,6 +2,7 @@ let audio = null;
 let interval = null;
 let currentIndex = 0;
 let mouthCues = [];
+
 let baseImage = new Image();
 let isBaseLoaded = false;
 
@@ -28,25 +29,26 @@ mouthShapes.forEach(shape => {
   mouthImages[shape] = img;
 });
 
+// Draws cat + mouth (default A) once all images are loaded
 function checkAllImagesLoaded() {
   if (loadedImages === mouthShapes.length + 1) {
     const canvas = document.getElementById('canvas-featured');
     const ctx = canvas.getContext('2d');
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(baseImage, 0, 0, 400, 400);
+    ctx.drawImage(mouthImages['A'], -60, 20, 420, 240); // Draw neutral mouth
+    console.log("✅ All images loaded and base + A drawn");
   }
 }
 
 function drawFrame(phoneme, ctx, canvas) {
-  if (!isBaseLoaded) return;
-
-  const upperPhoneme = phoneme.toUpperCase();
-  const mouthImg = mouthImages[upperPhoneme];
-
-  if (!mouthImg) return;
+  const mouth = mouthImages[phoneme.toUpperCase()];
+  if (!isBaseLoaded || !mouth) return;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(baseImage, 0, 0, 400, 400);
-  ctx.drawImage(mouthImg, -60, 20, 420, 240); // Adjusted mouth position
+  ctx.drawImage(mouth, -60, 20, 420, 240);
 }
 
 function updateFrame(ctx, canvas) {
@@ -68,26 +70,18 @@ function playLipSync(jsonPath, audioPath, canvasId) {
   const ctx = canvas.getContext('2d');
 
   fetch(jsonPath)
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
       mouthCues = data.mouthCues;
       currentIndex = 0;
 
-      // Reset and create new audio object every time
-      if (audio) {
-        audio.pause();
-        audio.currentTime = 0;
-        clearInterval(interval);
+      console.log("🟢 Loaded mouthCues:", mouthCues);
+
+      if (!audio) {
+        audio = new Audio(audioPath);
       }
 
-      audio = new Audio(audioPath);
-
-      audio.addEventListener('ended', () => {
-        clearInterval(interval);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(baseImage, 0, 0, 400, 400); // Show base at end
-      });
-
+      audio.addEventListener('ended', () => clearInterval(interval));
       audio.play();
 
       interval = setInterval(() => {
@@ -96,9 +90,7 @@ function playLipSync(jsonPath, audioPath, canvasId) {
         }
       }, 60);
     })
-    .catch(error => {
-      console.error('Failed to load JSON or audio:', error);
-    });
+    .catch(err => console.error("❌ JSON or audio error:", err));
 }
 
 function pauseLipSync() {
@@ -112,11 +104,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('canvas-featured');
   const ctx = canvas.getContext('2d');
 
-  if (isBaseLoaded) {
+  if (isBaseLoaded && mouthImages['A']) {
     ctx.drawImage(baseImage, 0, 0, 400, 400);
-  } else {
-    baseImage.onload = () => {
-      ctx.drawImage(baseImage, 0, 0, 400, 400);
-    };
+    ctx.drawImage(mouthImages['A'], -60, 20, 420, 240);
   }
 });
