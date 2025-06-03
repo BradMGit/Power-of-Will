@@ -151,7 +151,7 @@ def login():
 
 @app.route("/gallery")
 def gallery():
-    image_files = [f"assets/img/gallery{i}.jpg" for i in range(1, 11)]
+    image_files = [f"assets/img/gallery{i}.jpg" for i in range(1, 15)]
     return render_template("gallery.html", images=image_files, now=datetime.now())
 
 
